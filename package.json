@@ -16,14 +16,10 @@
   "author": "Grupo 418 - I'm a teapot",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^3.1.0",
-    "sequelize-cli": "^6.6.2"
+    "nodemon": "^3.1.0"
   },
   "dependencies": {
     "express": "^4.21.0",
-    "joi": "^17.13.3",
-    "next": "^14.2.15",
-    "react-dom": "^18.3.1",
-    "sequelize": "^6.37.4"
+    "joi": "^17.13.3"
   }
 }

@@ -8,7 +8,7 @@ class ProductoController {
 
   async getById(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findByPk(id);
+    const producto = await Producto.findById(id);
     res.status(200).send(producto);
   }
 
@@ -23,14 +23,14 @@ class ProductoController {
 
   async update(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findByPk(id);
+    const producto = await Producto.findById(id);
     producto.update(req.body);
     res.status(200).send(producto);
   }
 
   async delete(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findByPk(id);
+    const producto = await Producto.findById(id);
     try {
       await producto.destroy();
       res.status(200).send({ message: "Producto eliminado correctamente" });
@@ -43,7 +43,7 @@ class ProductoController {
 
   async getComponentesByProducto(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findByPk(id, {
+    const producto = await Producto.findById(id, {
       include: [
         {
           model: Componente,
@@ -58,7 +58,7 @@ class ProductoController {
 
   async getFabricantesByProducto(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findByPk(id, {
+    const producto = await Producto.findById(id, {
       include: [
         {
           model: Fabricante,
@@ -80,12 +80,12 @@ class ProductoController {
     const { id } = req.params;
     const { body } = req; // Array de objetos con id
 
-    const producto = await Producto.findByPk(id);
+    const producto = await Producto.findById(id);
 
     try {
       const componentes = await Promise.all(
         body.map(async ({ id }) => {
-          return await Componente.findByPk(id);
+          return await Componente.findById(id);
         })
       );
 
@@ -103,12 +103,12 @@ class ProductoController {
     const { id } = req.params;
     const { body } = req;
 
-    const producto = await Producto.findByPk(id);
+    const producto = await Producto.findById(id);
 
     try {
       const fabricantes = await Promise.all(
         body.map(async ({ id }) => {
-          return await Fabricante.findByPk(id);
+          return await Fabricante.findById(id);
         })
       );
 
