@@ -7,14 +7,14 @@ const fabricanteSchema = new mongoose.Schema(
     numeroContacto: { type: Number, required: false },
     pathImgPerfil: { type: String, required: false },
     productos: [
-      { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "Producto" 
-      }
-    ], // Relación con productos
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Producto",
+      },
+    ],
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 

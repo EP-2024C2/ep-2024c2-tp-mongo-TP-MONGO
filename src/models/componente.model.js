@@ -7,12 +7,12 @@ const componenteSchema = new mongoose.Schema(
     productos: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Producto", // Relación con productos
+        ref: "Producto",
       },
     ],
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 

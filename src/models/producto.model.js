@@ -5,19 +5,21 @@ const productoSchema = new mongoose.Schema(
     nombre: { type: String, required: true },
     descripcion: { type: String, required: false },
     precio: { type: Number, required: true },
-    fabricante: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Fabricante", // Relación con fabricante
-    },
+    fabricante: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Fabricante",
+      },
+    ],
     componentes: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Componente", // Relación con componentes
+        ref: "Componente",
       },
     ],
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
