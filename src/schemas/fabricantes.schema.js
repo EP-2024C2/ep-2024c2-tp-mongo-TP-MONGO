@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const fabricanteSchema = Joi.object({
   nombre: Joi.string().required().messages({
-    "string.empty": "El nombre no puede estar vacío",
+    "string.empty": "El nombre del fabricante no puede estar vacío",
     "any.required": "El nombre del fabricante es obligatorio",
   }),
 
@@ -11,7 +11,7 @@ const fabricanteSchema = Joi.object({
     "any.required": "La dirección es obligatoria",
   }),
 
-  numeroContacto: Joi.string().strict().required().messages({
+  numeroContacto: Joi.string().required().messages({
     "string.empty": "El número de contacto no puede estar vacío",
     "any.required": "El número de contacto es obligatorio",
   }),

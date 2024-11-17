@@ -2,13 +2,23 @@ const { Producto, Componente, Fabricante } = require("../models");
 
 class ProductoController {
   async getAll(req, res) {
-    const productos = await Producto.findAll();
+    const productos = await Producto.find().select(
+      " -createdAt -updatedAt -__v"
+    );
     res.status(200).send(productos);
   }
 
   async getById(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findById(id);
+    const producto = await Producto.findById(id, [
+      "-_id",
+      "-createdAt",
+      "-updatedAt",
+      "-__v",
+      "-componentes",
+      "-fabricante",
+    ]);
+
     res.status(200).send(producto);
   }
 
@@ -23,16 +33,14 @@ class ProductoController {
 
   async update(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findById(id);
-    producto.update(req.body);
-    res.status(200).send(producto);
+    await Producto.updateOne({ _id: id }, { $set: req.body });
+    res.status(200).send("Producto actualizado correctamente");
   }
 
   async delete(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findById(id);
     try {
-      await producto.destroy();
+      await Producto.deleteOne({ _id: id });
       res.status(200).send({ message: "Producto eliminado correctamente" });
     } catch (error) {
       return res
@@ -43,56 +51,57 @@ class ProductoController {
 
   async getComponentesByProducto(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findById(id, {
-      include: [
-        {
-          model: Componente,
-          attributes: ["nombre", "descripcion"],
-          through: { attributes: [] },
-        },
-      ],
-      through: { attributes: [] },
-    });
+    const producto = await Producto.findById(id, [
+      "-_id",
+      "-createdAt",
+      "-updatedAt",
+      "-__v",
+      "-fabricante",
+    ]).populate("componentes", ["nombre", "descripcion", "-_id"]);
     res.status(200).send(producto);
   }
 
   async getFabricantesByProducto(req, res) {
     const { id } = req.params;
-    const producto = await Producto.findById(id, {
-      include: [
-        {
-          model: Fabricante,
-          attributes: [
-            "nombre",
-            "direccion",
-            "numeroContacto",
-            "pathImgPerfil",
-          ],
-          through: { attributes: [] },
-        },
-      ],
-      through: { attributes: [] },
-    });
+    const producto = await Producto.findById(id, [
+      "-_id",
+      "-createdAt",
+      "-updatedAt",
+      "-componentes",
+      "-__v",
+    ]).populate("fabricante", [
+      "nombre",
+      "descripcion",
+      "precio",
+      "pathImg",
+      "-_id",
+    ]);
     res.status(200).send(producto);
   }
 
   async createComponenteByProducto(req, res) {
     const { id } = req.params;
-    const { body } = req; // Array de objetos con id
-
-    const producto = await Producto.findById(id);
+    const { body } = req;
 
     try {
-      const componentes = await Promise.all(
-        body.map(async ({ id }) => {
-          return await Componente.findById(id);
-        })
-      );
+      const listaIdsComponentes = body.map(({ id }) => id);
 
-      await producto.addComponentes(componentes);
+      listaIdsComponentes.forEach(async (idFabricantes) => {
+        await Componente.updateOne(
+          { _id: idFabricantes },
+          { $set: { productos: id } }
+        );
+      });
+
+      await Producto.updateOne(
+        { _id: id },
+        { $set: { componentes: listaIdsComponentes } }
+      );
 
       res.status(201).json({ message: "Componentes asociados al producto" });
     } catch (error) {
+      console.log(error);
+
       res
         .status(500)
         .json({ message: "Error al asociar los componentes.", error });
@@ -103,16 +112,20 @@ class ProductoController {
     const { id } = req.params;
     const { body } = req;
 
-    const producto = await Producto.findById(id);
-
     try {
-      const fabricantes = await Promise.all(
-        body.map(async ({ id }) => {
-          return await Fabricante.findById(id);
-        })
-      );
+      const listaIdsFabricantes = body.map(({ id }) => id);
 
-      await producto.addFabricantes(fabricantes);
+      listaIdsFabricantes.forEach(async (idFabricantes) => {
+        await Fabricante.updateOne(
+          { _id: idFabricantes },
+          { $set: { productos: id } }
+        );
+      });
+
+      await Producto.updateOne(
+        { _id: id },
+        { $set: { componentes: listaIdsFabricantes } }
+      );
 
       res.status(201).json({ message: "Fabricantes asociados al producto" });
     } catch (error) {

@@ -5,9 +5,8 @@ const Joi = require("joi");
 
 const idSchema = Joi.array().items(
   Joi.object({
-    id: Joi.number().strict().min(1).required().messages({
+    id: Joi.string().strict().min(1).required().messages({
       "any.required": "El id es requerido",
-      "number.base": "El id debe ser un número",
     }),
   })
 );

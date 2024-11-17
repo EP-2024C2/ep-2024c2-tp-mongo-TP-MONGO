@@ -5,6 +5,7 @@ const productoSchema = new mongoose.Schema(
     nombre: { type: String, required: true },
     descripcion: { type: String, required: false },
     precio: { type: Number, required: true },
+    pathImg: { type: String, required: false },
     fabricante: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,7 +20,7 @@ const productoSchema = new mongoose.Schema(
     ],
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
