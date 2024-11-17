@@ -231,3 +231,188 @@ Obtiene los datos del producto registrado con el id 1, con todos los fabricantes
 ## BONUS
 
 - Investigar como dockerizar la aplicación en node, es decir, generar una imagen de su aplicacion, versionarla y luego poder por a correr la apliación en un contendor.
+
+
+
+
+
+<details>
+    <summary>
+      <div class="endpoint-header">
+        <span>POST</span>
+        <h1>/pet</h1>
+      </div>
+    </summary>
+    <div class="content">
+      <p><strong>Descripción:</strong></p>
+      <p>Devuelve un único recurso de tipo <code>pet</code>.</p>
+      <h2>Parámetros</h2>
+      <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>petId</td>
+            <td>integer</td>
+            <td>Sí</td>
+            <td>ID de la mascota a retornar</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Respuestas</h2>
+      <h3>200 - Operación exitosa</h3>
+      <p><strong>Contenido:</strong> <code>application/json</code></p>
+      <pre>
+{
+  "id": 0,
+  "category": {
+    "id": 0,
+    "name": "string"
+  },
+  "name": "doggie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "available"
+}
+      </pre>
+      <h3>400 - ID inválido suministrado</h3>
+      <p><strong>Descripción:</strong> El ID proporcionado no es válido.</p>
+      <h3>404 - Mascota no encontrada</h3>
+      <p><strong>Descripción:</strong> No se encontró ninguna mascota con el ID proporcionado.</p>
+    </div>
+  </details>
+  <details>
+    <summary>
+      <div class="endpoint-header">
+        <span>GET</span>
+        <h1>/pet/{petId}</h1>
+      </div>
+    </summary>
+    <div class="content">
+      <p><strong>Descripción:</strong></p>
+      <p>Devuelve un único recurso de tipo <code>pet</code>.</p>
+      <h2>Parámetros</h2>
+      <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>petId</td>
+            <td>integer</td>
+            <td>Sí</td>
+            <td>ID de la mascota a retornar</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Respuestas</h2>
+      <h3>200 - Operación exitosa</h3>
+      <p><strong>Contenido:</strong> <code>application/json</code></p>
+      <pre>
+{
+  "id": 0,
+  "category": {
+    "id": 0,
+    "name": "string"
+  },
+  "name": "doggie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "available"
+}
+      </pre>
+      <h3>400 - ID inválido suministrado</h3>
+      <p><strong>Descripción:</strong> El ID proporcionado no es válido.</p>
+      <h3>404 - Mascota no encontrada</h3>
+      <p><strong>Descripción:</strong> No se encontró ninguna mascota con el ID proporcionado.</p>
+    </div>
+  </details>
+ 
+   <style>
+    summary {
+        list-style: none;
+      cursor: pointer;
+      padding-left: 20px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    summary:hover {
+      background-color: #e0e0e0;
+    }
+
+    details {
+      margin-bottom: 10px;
+    }
+
+    details[open] summary {
+      background-color: #d0f0ff;
+    }
+
+    .endpoint-header {
+      display: flex;
+      align-items: center;
+    }
+
+    .endpoint-header span {
+      background-color: #61affe;
+      color: white;
+      padding: 5px 20px;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .endpoint-header h1 {
+      margin-left: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      color: black;
+    }
+
+    .content {
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      border-radius: 0 0 5px 5px;
+      background-color: #fafafa;
+    }
+
+    pre {
+      background-color: black;
+      padding: 10px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+  </style>
