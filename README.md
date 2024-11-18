@@ -363,7 +363,7 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 
 ```
 {
-    "message": "Fabricantes asociados al producto"
+    "error": "Producto no encontrado"
 }
 ```
 
@@ -535,7 +535,8 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 {
     "errores": [
         {
-            "a"El precio del producto debe ser un número"
+            "atributo": "numeroContacto",
+            "error": "\"numeroContacto\" must be a string"
         }
     ]
 }
@@ -545,16 +546,13 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 
 ```
 {
-    "error": "Producto no encontrado"
+    "error": "Fabricante no encontrado"
 }
 ```
 </details>
 
 
 
-############################## ---------------------------------------- ################################
-## DELETE /fabricantes/:id   --FALTA
-| DELETE | /fabricantes/:id           | 200, 404, 500 | Borrar un fabricante en particular                    |
 <details>
   <summary><img src = https://img.shields.io/badge/DELETE-f13c3c> <b>/fabricantes/:id</b></summary>
 
@@ -567,32 +565,25 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 ![200](https://img.shields.io/badge/200-OK-green)
 
 ```
-{ message: "Producto eliminado correctamente" }
+{ message: "Fabricante eliminado correctamente" }
 ```
 ---
 ![404](https://img.shields.io/badge/404-Not_Found-red)
 
 ```
-{ message: "Producto no encontrado" }
+{ message: "Fabricante no encontrado" }
 ```
 
---- ESTE NO SE PODIA
+--- 
 ![500](https://img.shields.io/badge/500-Internal_Server_Error-red)
 
 ```
 {
-    "errores": [
-        {
-            "atributo": "precio",
-            "error": "El precio del producto debe ser mayor a 0"
-        }
-    ]
+    "error": "No es posible eliminar el Fabricante, ya que poseé asociaciones"
 }
 ```
 </details>
 
-############################## ---------------------------------------- ################################
-## GET /fabricantes/:id/productos   --FALTA
 
 <details>
   <summary><img src = https://img.shields.io/badge/GET-5eaaf6> <b>/fabricantes/:id/productos</b></summary>
@@ -606,28 +597,33 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 ![200](https://img.shields.io/badge/200-OK-green)
 
 ```
-{ message: "Producto creado correctamente" }
+{
+    "pathImgPerfil": null,
+    "nombre": "Fabricante 1",
+    "direccion": "Direccion 444",
+    "numeroContacto": "011 223-4342",
+    "productos": [
+        {
+            "descripcion": null,
+            "pathImg": null,
+            "nombre": "Producto 76",
+            "precio": 342
+        }
+    ]
+}
 ```
 ---
 ![404](https://img.shields.io/badge/404-Not_Found-red)
 
 ```
 {
-    "errores": [
-        {
-            "atributo": "precio",
-            "error": "El precio del producto debe ser mayor a 0"
-        }
-    ]
+    "error": "Fabricante no encontrado"
 }
 ```
 
 </details>
   
 
-
-############################## ---------------------------------------- ################################
-## GET /componentes
 <details>
   <summary><img src = https://img.shields.io/badge/GET-5eaaf6> <b>/componentes</b></summary>
 
@@ -654,10 +650,6 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 </details>
 
 
-
-############################## ---------------------------------------- ################################
-## GET /componentes
-| GET    | /componentes/:id           | 200, 404      | Obtener un componente en particular                   |
 <details>
   <summary><img src = https://img.shields.io/badge/GET-5eaaf6> <b>/componentes/:id</b></summary>
 
@@ -671,25 +663,21 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 
 ```
 {
-  
-}
+  "nombre": "Componente 1",
+  "descripcion": "descripcion del componente"
+ }
 ```
 ---
 ![404](https://img.shields.io/badge/404-Not_Found-red)
 
 ```
 {
-  "error": "Fabricante no encontrado"
+  "error": "Componente no encontrado"
 }
 ```
 </details>
 
 
-
-
-
-############################## ---------------------------------------- ################################
-## POST /fabricantes   --FALTA
 <details>
   <summary><img src = https://img.shields.io/badge/POST-47c68c> <b>/componentes</b></summary>
 
@@ -702,7 +690,7 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 ![201](https://img.shields.io/badge/201-Created-green)
 
 ```
-{ message: "Fabricante creado correctamente" }
+{ message: "Componente creado correctamente" }
 ```
 ---
 ![400](https://img.shields.io/badge/400-Bad_Request-red)
@@ -711,7 +699,8 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 {
     "errores": [
         {
-            "atribut
+            "atributo": "nombre",
+            "error": "El nombre del componente es obligatorio"
         }
     ]
 }
@@ -719,16 +708,12 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 </details>
 
 
-
-############################## ------
-
-| PUT    | /componentes/:id           | 200, 404      | Modificar los datos de un componente en particular    |
 <details>
-  <summary><img src = https://img.shields.io/badge/PUT-f49c2f> <b>/productos/:id</b></summary>
+  <summary><img src = https://img.shields.io/badge/PUT-f49c2f> <b>/componentes/:id</b></summary>
 
 ---
 
-***Descripción:*** Modifica los datos del producto identificado con el id que se le pase en el recurso. En caso de que ese producto no se encuentre o se pase mal algún dato, devuelve un mensaje de error indicando cuál es el error.
+***Descripción:*** Modifica los datos de el componente identificado con el id que se le pase en el recurso. En caso de que ese componente no se encuentre o se pase mal algún dato, devuelve un mensaje de error indicando cuál es el error.
     
 **Respuestas:**
     
@@ -736,7 +721,7 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 
 ```
 {
-    "message": "Producto actualizado correctamente"
+    "message": "Componente actualizado correctamente"
 }
 ```
 ---
@@ -746,8 +731,8 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 {
     "errores": [
         {
-            "atributo": "precio",
-            "error": "El precio del producto debe ser un número"
+            "atributo": "nombre",
+            "error": "El nombre del componente no puede estar vacío"
         }
     ]
 }
@@ -757,116 +742,79 @@ Implementar la API utilizando el framework express en el entorde de ejecucion de
 
 ```
 {
-    "error": "Producto no encontrado"
+    "error": "Componente no encontrado"
+}
+```
+</details>
+
+
+<details>
+  <summary><img src = https://img.shields.io/badge/DELETE-f13c3c> <b>/componentes/:id</b></summary>
+
+---
+
+***Descripción:*** Borra el componente identificado con el id que se le pase en el recurso. En caso de que ese componente no se encuentre o no se pueda eliminar, devuelve un mensaje de error.
+    
+**Respuestas:**
+    
+![200](https://img.shields.io/badge/200-OK-green)
+
+```
+{ message: "Componente eliminado correctamente" }
+```
+---
+![404](https://img.shields.io/badge/404-Not_Found-red)
+
+```
+{ message: "Componente no encontrado" }
+```
+
+--- 
+![500](https://img.shields.io/badge/500-Internal_Server_Error-red)
+
+```
+{
+    "error": "No es posible eliminar el Componente, ya que poseé asociaciones"
 }
 ```
 </details>
 
 
 
+<details>
+  <summary><img src = https://img.shields.io/badge/GET-5eaaf6> <b>/componentes/:id/productos</b></summary>
 
-| DELETE | /componentes/:id           | 200, 404, 500 | Borrar un componente en particular                    |
-| GET    | /componentes/:id/productos | 200, 404      | Obtener todos los productos de un componente          |
+---
 
-## Ejemplos
-
-A modo de ejemplo se muestra el resultado de algunas respuesta de los endpoind detallado en la tabla de la sección anterior.
-
-Recurso: **_/fabricantes/1/productos_**
-
-Obtiene los datos del fabricante registrado con el id 1, con todos los productos que fabrica, incluyendo los atributos de cada producto y los componentes asociados a esos productos.
+***Descripción:*** Obtiene todos los productos del componente identificado con el id que se le pase en el recurso.
+    
+**Respuestas:**
+    
+![200](https://img.shields.io/badge/200-OK-green)
 
 ```
 {
-    "id": 1,
-    "nombre": "TechCorp",
-    "direccion": "1234 Elm St, Ciudad",
-    "contacto": "+123456789",
-    "pathImgPerfil": "/images/fabricantes/techcorp.jpg",
+    "nombre": "Componente 1",
+    "descripcion": "descripcion del componente",
     "productos": [
         {
-            "id": 1,
-            "nombre": "Laptop X200",
-            "descripcion": "Una laptop de alto rendimiento",
-            "precio": 1200.99,
-            "pathImg": "/images/productos/laptop-x200.jpg",
-            "componentes": [
-                {
-                    "id": 1,
-                    "nombre": "Procesador Intel i7",
-                    "descripcion": "Procesador de octava generación"
-                },
-                {
-                    "id": 2,
-                    "nombre": "SSD 1TB",
-                    "descripcion": "Disco sólido de 1TB de capacidad"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "nombre": "Smartphone S5",
-            "descripcion": "Teléfono inteligente con pantalla OLED",
-            "precio": 799.99,
-            "pathImg": "/images/productos/smartphone-s5.jpg",
-            "componentes": [
-                {
-                    "id": 3,
-                    "nombre": "Pantalla OLED 6.5 pulgadas",
-                    "descripcion": "Pantalla de alta definición"
-                },
-                {
-                    "id": 4,
-                    "nombre": "Batería 4000mAh",
-                    "descripcion": "Batería de larga duración"
-                }
-            ]
+            "descripcion": null,
+            "pathImg": null,
+            "nombre": "Producto 76",
+            "precio": 342
         }
     ]
 }
 ```
-
-Recurso: **_/productos/1/fabricantes_**
-
-Obtiene los datos del producto registrado con el id 1, con todos los fabricantes que lo producen, incluyendo los atributos de cada fabricante.
+---
+![404](https://img.shields.io/badge/404-Not_Found-red)
 
 ```
 {
-    "id": 1,
-    "nombre": "Laptop X200",
-    "descripcion": "Una laptop de alto rendimiento",
-    "precio": 1200.99,
-    "pathImg": "/images/productos/laptop-x200.jpg",
-    "fabricantes": [
-        {
-            "id": 1,
-            "nombre": "TechCorp",
-            "direccion": "1234 Elm St, Ciudad",
-            "contacto": "+123456789",
-            "pathImgPerfil": "/images/fabricantes/techcorp.jpg"
-        },
-        {
-            "id": 2,
-            "nombre": "Innovatech",
-            "direccion": "4567 Oak Ave, Ciudad",
-            "contacto": "+987654321",
-            "pathImgPerfil": "/images/fabricantes/innovatech.jpg"
-        }
-    ]
+    "error": "Componente no encontrado"
 }
 ```
 
-## Consideraciones Finales sobre la Entrega
-
-- Deberán fundamentar las decisiones tomadas respecto de enfoque utilizado en cada relación dentro del archvivo README.md
-- El equipo debera entegar un repositorio de github con todas las instrucciones necesarias para correr la api.
-- Deberán detallar los commandos necesarios para la instalación y ejecución de la api.
-- El puerto de listener deberá ser configurable por variable de entorno
-
-## BONUS
-
-- Investigar como dockerizar la aplicación en node, es decir, generar una imagen de su aplicacion, versionarla y luego poder por a correr la apliación en un contendor.
-
-
+</details>
 
 </details>
