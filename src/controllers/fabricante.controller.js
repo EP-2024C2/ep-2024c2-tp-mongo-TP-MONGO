@@ -1,17 +1,10 @@
-const { Fabricante, Producto, Componente } = require("../models");
+const { Fabricante } = require("../models");
 
 class FabricanteController {
   async getAll(req, res) {
-    const fabricantes = await Fabricante.find()
-      .select("-_id -createdAt -updatedAt -__v")
-      .populate("productos", [
-        "-_id",
-        "-createdAt",
-        "-updatedAt",
-        "-__v",
-        "-fabricante",
-        "-componentes",
-      ]);
+    const fabricantes = await Fabricante.find().select(
+      " -createdAt -updatedAt -__v -productos"
+    );
     res.status(200).send(fabricantes);
   }
 
@@ -56,7 +49,7 @@ class FabricanteController {
   async update(req, res) {
     const { id } = req.params;
     await Fabricante.updateOne({ _id: id }, { $set: req.body });
-    res.status(200).send("Fabricante actualizado correctamente");
+    res.status(200).send({ message: "Fabricante actualizado correctamente" });
   }
 
   async delete(req, res) {

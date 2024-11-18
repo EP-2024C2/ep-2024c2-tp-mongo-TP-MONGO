@@ -1,17 +1,10 @@
-const { Componente, Producto } = require("../models");
+const { Componente } = require("../models");
 
 class ComponenteController {
   async getAll(req, res) {
-    const componentes = await Componente.find()
-      .select("-_id -createdAt -updatedAt -__v")
-      .populate("productos", [
-        "-_id",
-        "-createdAt",
-        "-updatedAt",
-        "-__v",
-        "-fabricante",
-        "-componentes",
-      ]);
+    const componentes = await Componente.find().select(
+      " -createdAt -updatedAt -__v -productos"
+    );
     res.status(200).json(componentes);
   }
 
@@ -56,7 +49,7 @@ class ComponenteController {
   async update(req, res) {
     const { id } = req.params;
     await Componente.updateOne({ _id: id }, { $set: req.body });
-    res.status(200).send("Componente actualizado correctamente");
+    res.status(200).send({ message: "Componente actualizado correctamente" });
   }
 
   async delete(req, res) {

@@ -3,7 +3,7 @@ const { Producto, Componente, Fabricante } = require("../models");
 class ProductoController {
   async getAll(req, res) {
     const productos = await Producto.find().select(
-      " -createdAt -updatedAt -__v"
+      " -createdAt -updatedAt -__v -fabricante -componentes"
     );
     res.status(200).send(productos);
   }
@@ -34,7 +34,7 @@ class ProductoController {
   async update(req, res) {
     const { id } = req.params;
     await Producto.updateOne({ _id: id }, { $set: req.body });
-    res.status(200).send("Producto actualizado correctamente");
+    res.status(200).send({ message: "Producto actualizado correctamente" });
   }
 
   async delete(req, res) {
@@ -70,11 +70,11 @@ class ProductoController {
       "-componentes",
       "-__v",
     ]).populate("fabricante", [
-      "nombre",
-      "descripcion",
-      "precio",
-      "pathImg",
       "-_id",
+      "-createdAt",
+      "-updatedAt",
+      "-productos",
+      "-__v",
     ]);
     res.status(200).send(producto);
   }
@@ -124,7 +124,7 @@ class ProductoController {
 
       await Producto.updateOne(
         { _id: id },
-        { $set: { componentes: listaIdsFabricantes } }
+        { $set: { fabricante: listaIdsFabricantes } }
       );
 
       res.status(201).json({ message: "Fabricantes asociados al producto" });
