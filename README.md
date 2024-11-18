@@ -85,9 +85,11 @@ Y luego utilizar el comando: **npm start**
   
 ## API
 
-Implementar la API utilizando el framework express en el entorde de ejecucion de un poryecto NodeJs. Organizar el código en rutas, controlers y middleware utilizando la separación por recurso. A continuación se detallan los endpoinds que deberán estar disponbiles en la API.
-
+### Organización del código:
+- El código está organizado en rutas, controllers y middleware utilizando la separación por recurso.
 </details>
+
+
 <details>
   <summary>Endpoints</summary>
 
