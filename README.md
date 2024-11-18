@@ -1,13 +1,18 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/QBnwEJ5z)
 # Estrategias de Persistencia - TP 2024 - Documental
 
+<details>
+  <summary>Descripción del TP</summary>
+
+### Descripción del Trabajo Práctico
 Este trabajo práctico tiene como objetivo principal que los alumnos adquieran experiencia práctica en la implementación de las relaciones entre documentos en contexto de una API REST utilizando un ODM (Object-document mapping).
 
 Uno de los criterios que se tiende a confundir es el término de bases de datos NoSQL con la ausencia de relaciones, pero la verdad es que muchas de las bases de datos NoSQL ya nos ofrecen funcionalidades que nos permiten tener cierto grado de relación entre los datos.
 
-# Enfoques de relaciones en MongoDB
+## Enfoques de relaciones en MongoDB
 
 Las relaciones en MongoDB se pueden modelar en 2 enfoques diferentes: la relación incrustada o relación referenciada. La elección de estos enfoques dependerá del tipo de casuística a abordar y decisiones de modelamiento de datos.
+> **Nota:** La elección está explicada en la descripción del proyecto.
 
 ## Relación incrustada
 
@@ -30,20 +35,33 @@ Práctica de almacenar manualmente el campo \_id de un documento relacionado com
 - Criterios de Evaluación:
   Se evaluará la precisión y completitud en la implementación de las asociaciones en la API REST, así como la funcionalidad completa del CRUD para los recursos expuestos por la API.
 
+</details>
+<details>
+  <summary>Descripción del Proyecto</summary>
+ 
 ## Descripción del Proyecto
 
-Han sido contratados/as por una empresa de manufactura para desarrollar un sistema interno de gestión de productos. La empresa fabrica una amplia gama de productos tecnológicos que requieren componentes específicos y son producidos por múltiples fabricantes asociados. Actualmente, el proceso de gestión de esta información es manual y está descentralizado, lo que genera demoras y problemas en la producción. La empresa busca automatizar y centralizar estos datos mediante un sistema web eficiente que permita gestionar los productos, fabricantes y componentes de manera integrada.
+Se ha desarrollado un sistema interno de gestión de productos para una empresa de manufactura. La empresa fabrica una amplia gama de productos tecnológicos que requieren componentes específicos y son producidos por múltiples fabricantes asociados.
 
-## Modelo Documental a implementar
+La problemática de la empresa por la que se decidió hacer este sistema es que el proceso de gestión de la información es manual y está descentralizado, lo que genera demoras y problemas en la producción.
 
-Basandose en el siguiente diagrama de entidad-relacion (DER) utilizado para una base de datos relacional deberán deberán migrarlo a una base documental utilizando los críterios que consideren conveniente en cada caso. Relación Incrustada o Rleación Referenciada.
+Se decidió automatizar y centralizar estos datos mediante un sistema web eficiente que permita gestionar los productos, fabricantes y componentes de manera integrada.
+
+## Información de la API a implementar
+
+~~Basandose en el siguiente diagrama de entidad-relacion (DER) utilizado para una base de datos relacional deberán deberán migrarlo a una base documental utilizando los críterios que consideren conveniente en cada caso. Relación Incrustada o Rleación Referenciada.~~
+
+Se decidió implementar una base de datos **documental** utilizando como base el siguiente diagrama de entidad-relación (DER) diseñado para una base de datos relacional.
 
 ![DER](./img/DER.png)
 
-### Descripción del modelo DER
+#### Descripción del modelo DER
 
 - Un **Producto** puede tener muchos fabricantes, y un **Fabricante** puede fabricar muchos productos.
 - Un **Producto** puede tener muchos componentes, y un **Componente** puede formar parte de varios productos.
+
+###EXPLICACIÓN
+En este caso, se eligió utilizar **relaciones referenciadas** debido... EXPLICACIÓN...
 
 ### Base de datos
 
@@ -105,14 +123,61 @@ const Series = mongoose.model('Series', seriesSchema);
 module.exports = Series;
 ```
 
+  
 ## API
 
 Implementar la API utilizando el framework express en el entorde de ejecucion de un poryecto NodeJs. Organizar el código en rutas, controlers y middleware utilizando la separación por recurso. A continuación se detallan los endpoinds que deberán estar disponbiles en la API.
 
+</details>
+<details>
+  <summary>Endpoints</summary>
+
+### Endpoints
+- Todas las peticiones que se realicen a la API deben ser enviadas en **localHost** con el **puerto 3000** que se encuentra por defecto, o modificarlo por variable de entorno.
+
+### Ejemplos de cada recurso de la API con las diferentes respuestas:  
+
+> Recurso:
+
+![GET](https://img.shields.io/badge/GET-5eaaf6) **/productos**  
+
+
+***Descripción:*** Obtiene todos los productos. En caso de que no haya productos devuelve un array vacío.
+
+**Respuesta:**
+
+![200](https://img.shields.io/badge/200-OK-green)
+
+```
+código con productos y sin???
+```
+---
+
+![GET](https://img.shields.io/badge/GET-5eaaf6) **/productos/:id**
+
+***Descripción:*** Obtiene el producto identificado con el id que se le pase en el recurso. En caso de que ese producto no se encuentre devuelve un mensaje de error.
+
+**Respuesta:**
+
+![200](https://img.shields.io/badge/200-OK-green)
+
+```
+código 200
+```
+![404](https://img.shields.io/badge/404-Not_Found-red)
+
+```
+código 404
+```
+---
+
+
+
+
 | Verbo  | Recurso                    | Status code   | Descripción                                           |
 | ------ | -------------------------- | ------------- | ----------------------------------------------------- |
-| GET    | /productos                 | 200           | Obtener todos los productos                           |
-| GET    | /productos/:id             | 200, 404      | Obtener un producto en particular                     |
+| -GET    | /productos                 | 200           | Obtener todos los productos                           |
+| -GET    | /productos/:id             | 200, 404      | Obtener un producto en particular                     |
 | POST   | /productos                 | 201, 400      | Crear un producto                                     |
 | PUT    | /productos/:id             | 200, 404      | Modificar los datos de un producto en particular      |
 | DELETE | /productos/:id             | 200, 404, 500 | Borrar un producto en particular                      |
@@ -234,185 +299,4 @@ Obtiene los datos del producto registrado con el id 1, con todos los fabricantes
 
 
 
-
-
-<details>
-    <summary>
-      <div class="endpoint-header">
-        <span>POST</span>
-        <h1>/pet</h1>
-      </div>
-    </summary>
-    <div class="content">
-      <p><strong>Descripción:</strong></p>
-      <p>Devuelve un único recurso de tipo <code>pet</code>.</p>
-      <h2>Parámetros</h2>
-      <table border="1" cellspacing="0" cellpadding="5">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Requerido</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>petId</td>
-            <td>integer</td>
-            <td>Sí</td>
-            <td>ID de la mascota a retornar</td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Respuestas</h2>
-      <h3>200 - Operación exitosa</h3>
-      <p><strong>Contenido:</strong> <code>application/json</code></p>
-      <pre>
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}
-      </pre>
-      <h3>400 - ID inválido suministrado</h3>
-      <p><strong>Descripción:</strong> El ID proporcionado no es válido.</p>
-      <h3>404 - Mascota no encontrada</h3>
-      <p><strong>Descripción:</strong> No se encontró ninguna mascota con el ID proporcionado.</p>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <div class="endpoint-header">
-        <span>GET</span>
-        <h1>/pet/{petId}</h1>
-      </div>
-    </summary>
-    <div class="content">
-      <p><strong>Descripción:</strong></p>
-      <p>Devuelve un único recurso de tipo <code>pet</code>.</p>
-      <h2>Parámetros</h2>
-      <table border="1" cellspacing="0" cellpadding="5">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Requerido</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>petId</td>
-            <td>integer</td>
-            <td>Sí</td>
-            <td>ID de la mascota a retornar</td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Respuestas</h2>
-      <h3>200 - Operación exitosa</h3>
-      <p><strong>Contenido:</strong> <code>application/json</code></p>
-      <pre>
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}
-      </pre>
-      <h3>400 - ID inválido suministrado</h3>
-      <p><strong>Descripción:</strong> El ID proporcionado no es válido.</p>
-      <h3>404 - Mascota no encontrada</h3>
-      <p><strong>Descripción:</strong> No se encontró ninguna mascota con el ID proporcionado.</p>
-    </div>
-  </details>
- 
-   <style>
-    summary {
-        list-style: none;
-      cursor: pointer;
-      padding-left: 20px;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    summary:hover {
-      background-color: #e0e0e0;
-    }
-
-    details {
-      margin-bottom: 10px;
-    }
-
-    details[open] summary {
-      background-color: #d0f0ff;
-    }
-
-    .endpoint-header {
-      display: flex;
-      align-items: center;
-    }
-
-    .endpoint-header span {
-      background-color: #61affe;
-      color: white;
-      padding: 5px 20px;
-      border-radius: 5px;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-    }
-
-    .endpoint-header h1 {
-      margin-left: 10px;
-      font-family: Arial, sans-serif;
-      font-size: 24px;
-      color: black;
-    }
-
-    .content {
-      padding: 10px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      border-left: 1px solid #ccc;
-      border-right: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-      border-radius: 0 0 5px 5px;
-      background-color: #fafafa;
-    }
-
-    pre {
-      background-color: black;
-      padding: 10px;
-      border-radius: 5px;
-      overflow: auto;
-    }
-  </style>
+</details>
