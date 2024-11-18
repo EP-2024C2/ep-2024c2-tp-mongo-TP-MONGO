@@ -2,10 +2,18 @@ const mongoose = require("mongoose");
 
 const productoSchema = new mongoose.Schema(
   {
-    nombre: { type: String, required: true },
-    descripcion: { type: String, required: false },
-    precio: { type: Number, required: true },
-    pathImg: { type: String, required: false },
+    nombre: { type: mongoose.Schema.Types.String, required: true },
+    descripcion: {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      default: null,
+    },
+    precio: { type: mongoose.Schema.Types.Number, required: true },
+    pathImg: {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      default: null,
+    },
     fabricante: [
       {
         type: mongoose.Schema.Types.ObjectId,

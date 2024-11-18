@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 
 const componenteSchema = new mongoose.Schema(
   {
-    nombre: { type: String, required: true },
-    descripcion: { type: String, required: false },
+    nombre: { type: mongoose.Schema.Types.String, required: true },
+    descripcion: {
+      type: mongoose.Schema.Types.String,
+      required: false,
+      default: null,
+    },
     productos: [
       {
         type: mongoose.Schema.Types.ObjectId,

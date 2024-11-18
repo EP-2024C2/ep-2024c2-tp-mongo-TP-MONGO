@@ -12,17 +12,17 @@ const route = Router();
 
 route.get("/", ProductoController.getAll);
 
-route.get("/:id", validateId(Producto, "producto"), ProductoController.getById);
+route.get("/:id", validateId(Producto, "Producto"), ProductoController.getById);
 
 route.get(
   "/:id/componentes",
-  validateId(Producto, "producto"),
+  validateId(Producto, "Producto"),
   ProductoController.getComponentesByProducto
 );
 
 route.get(
   "/:id/fabricantes",
-  validateId(Producto, "producto"),
+  validateId(Producto, "Producto"),
   ProductoController.getFabricantesByProducto
 );
 
@@ -30,14 +30,14 @@ route.post("/", schemaValidator(productoSchema), ProductoController.create);
 
 route.post(
   "/:id/componentes",
-  validateId(Producto, "producto"),
+  validateId(Producto, "Producto"),
   schemaValidator(idSchema),
   ProductoController.createComponenteByProducto
 );
 
 route.post(
   "/:id/fabricantes",
-  validateId(Producto, "producto"),
+  validateId(Producto, "Producto"),
   schemaValidator(idSchema),
   ProductoController.createFabricanteByProducto
 );
@@ -45,13 +45,13 @@ route.post(
 route.put(
   "/:id",
   schemaValidator(productoSchema),
-  validateId(Producto, "producto"),
+  validateId(Producto, "Producto"),
   ProductoController.update
 );
 
 route.delete(
   "/:id",
-  validateId(Producto, "producto"),
+  validateId(Producto, "Producto"),
   ProductoController.delete
 );
 

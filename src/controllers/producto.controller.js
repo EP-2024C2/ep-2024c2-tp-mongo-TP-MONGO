@@ -23,12 +23,8 @@ class ProductoController {
   }
 
   async create(req, res) {
-    try {
-      const producto = await Producto.create(req.body);
-      res.status(201).send(producto);
-    } catch (error) {
-      res.status(400).send({ message: error.message });
-    }
+    await Producto.create(req.body);
+    res.status(201).send({ message: "Producto creado correctamente" });
   }
 
   async update(req, res) {
