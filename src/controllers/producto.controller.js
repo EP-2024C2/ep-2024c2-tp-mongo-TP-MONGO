@@ -3,7 +3,7 @@ const { Producto, Componente, Fabricante } = require("../models");
 class ProductoController {
   async getAll(req, res) {
     const productos = await Producto.find().select(
-      " -createdAt -updatedAt -__v -fabricante -componentes"
+      "-_id -createdAt -updatedAt -__v -fabricante -componentes"
     );
     res.status(200).send(productos);
   }
@@ -35,14 +35,8 @@ class ProductoController {
 
   async delete(req, res) {
     const { id } = req.params;
-    try {
-      await Producto.deleteOne({ _id: id });
-      res.status(200).send({ message: "Producto eliminado correctamente" });
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: "No se puede eliminar el producto" });
-    }
+    await Producto.deleteOne({ _id: id });
+    res.status(200).send({ message: "Producto eliminado correctamente" });
   }
 
   async getComponentesByProducto(req, res) {

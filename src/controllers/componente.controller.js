@@ -50,14 +50,8 @@ class ComponenteController {
 
   async delete(req, res) {
     const { id } = req.params;
-    try {
-      await Componente.deleteOne({ _id: id });
-      res.status(200).send({ message: "Componente eliminado correctamente" });
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: "No se puede eliminar el componente" });
-    }
+    await Componente.deleteOne({ _id: id });
+    res.status(200).send({ message: "Componente eliminado correctamente" });
   }
 }
 

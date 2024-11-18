@@ -20,12 +20,8 @@ class FabricanteController {
   }
 
   async create(req, res) {
-    try {
-      await Fabricante.create(req.body);
-      res.status(201).send({ message: "Producto creado correctamente" });
-    } catch (error) {
-      res.status(400).send({ message: error.message });
-    }
+    await Fabricante.create(req.body);
+    res.status(201).send({ message: "Producto creado correctamente" });
   }
 
   async getProductosByFabricante(req, res) {
@@ -54,14 +50,8 @@ class FabricanteController {
 
   async delete(req, res) {
     const { id } = req.params;
-    try {
-      await Fabricante.deleteOne({ _id: id });
-      res.status(200).send({ message: "Componente eliminado correctamente" });
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: "No se puede eliminar el fabricante" });
-    }
+    await Fabricante.deleteOne({ _id: id });
+    res.status(200).send({ message: "Componente eliminado correctamente" });
   }
 }
 

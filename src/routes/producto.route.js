@@ -8,6 +8,7 @@ const {
 } = require("../schemas");
 const { Producto } = require("../models");
 const { Router } = require("express");
+const validateAsociation = require("../middlewares/asociationValidator");
 const route = Router();
 
 route.get("/", ProductoController.getAll);
@@ -52,6 +53,7 @@ route.put(
 route.delete(
   "/:id",
   validateId(Producto, "Producto"),
+  validateAsociation(Producto, "Producto", ["componentes", "fabricante"]),
   ProductoController.delete
 );
 

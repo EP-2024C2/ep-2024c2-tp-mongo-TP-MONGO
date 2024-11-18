@@ -4,6 +4,7 @@ const route = Router();
 const { schemaValidator, validateId } = require("../middlewares");
 const { componenteSchema } = require("../schemas");
 const { Componente } = require("../models");
+const validateAsociation = require("../middlewares/asociationValidator");
 
 route.get("/", ComponenteController.getAll);
 
@@ -31,6 +32,7 @@ route.put(
 route.delete(
   "/:id",
   validateId(Componente, "Componente"),
+  validateAsociation(Componente, "Componente", ["productos"]),
   ComponenteController.delete
 );
 

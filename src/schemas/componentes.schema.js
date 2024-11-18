@@ -6,7 +6,7 @@ const componenteSchema = Joi.object({
     "any.required": "El nombre del componente es obligatorio",
   }),
 
-  descripcion: Joi.string(), //Verificar!!!
+  descripcion: Joi.string(),
 });
 
 module.exports = componenteSchema;

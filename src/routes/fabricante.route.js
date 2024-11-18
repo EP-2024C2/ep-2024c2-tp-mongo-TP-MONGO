@@ -3,6 +3,7 @@ const { Router } = require("express");
 const { schemaValidator, validateId } = require("../middlewares");
 const { fabricanteSchema } = require("../schemas");
 const { Fabricante } = require("../models");
+const validateAsociation = require("../middlewares/asociationValidator");
 const route = Router();
 
 route.get("/", FabricanteController.getAll);
@@ -31,6 +32,7 @@ route.put(
 route.delete(
   "/:id",
   validateId(Fabricante, "Fabricante"),
+  validateAsociation(Fabricante, "Fabricante", ["productos"]),
   FabricanteController.delete
 );
 
