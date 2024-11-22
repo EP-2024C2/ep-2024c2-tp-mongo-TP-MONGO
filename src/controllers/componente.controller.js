@@ -3,7 +3,7 @@ const { Componente } = require("../models");
 class ComponenteController {
   async getAll(req, res) {
     const componentes = await Componente.find().select(
-      "-_id -createdAt -updatedAt -__v -productos"
+      "-createdAt -updatedAt -__v -productos"
     );
     res.status(200).json(componentes);
   }
@@ -38,8 +38,8 @@ class ComponenteController {
   }
 
   async create(req, res) {
-    await Componente.create(req.body);
-    res.status(201).send({ message: "Producto creado correctamente" });
+    const componente = await Componente.create(req.body);
+    res.status(201).send(componente);
   }
 
   async update(req, res) {

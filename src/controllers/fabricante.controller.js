@@ -3,7 +3,7 @@ const { Fabricante } = require("../models");
 class FabricanteController {
   async getAll(req, res) {
     const fabricantes = await Fabricante.find().select(
-      "-_id -createdAt -updatedAt -__v -productos"
+      " -createdAt -updatedAt -__v -productos"
     );
     res.status(200).send(fabricantes);
   }
@@ -20,8 +20,8 @@ class FabricanteController {
   }
 
   async create(req, res) {
-    await Fabricante.create(req.body);
-    res.status(201).send({ message: "Producto creado correctamente" });
+    const fabricante = await Fabricante.create(req.body);
+    res.status(201).send(fabricante);
   }
 
   async getProductosByFabricante(req, res) {

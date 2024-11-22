@@ -3,7 +3,7 @@ const { Producto, Componente, Fabricante } = require("../models");
 class ProductoController {
   async getAll(req, res) {
     const productos = await Producto.find().select(
-      "-_id -createdAt -updatedAt -__v -fabricante -componentes"
+      " -createdAt -updatedAt -__v -fabricante -componentes"
     );
     res.status(200).send(productos);
   }
