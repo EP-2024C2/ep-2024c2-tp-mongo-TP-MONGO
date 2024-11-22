@@ -1,20 +1,25 @@
 {
   "name": "tp-ntom",
   "version": "1.0.0",
-  "description": "Trabajo Practico M to N - -Grupo xxxxxxxxx",
+  "description": "Trabajo Practico M to N - -Grupo persistenciaCafe24",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [
     "sequelize",
     "association",
     "MTON"
   ],
-  "author": "Grupo xxxxxxxxx",
+  "author": "Grupo persistenciaCafe24",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1"
   }
 }
